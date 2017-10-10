@@ -32,28 +32,9 @@ namespace YavinBot
                 var Bot = new Telegram.Bot.TelegramBotClient(key); // инициализируем API
                 await Bot.SetWebhookAsync(""); // Обязательно! убираем старую привязку к вебхуку для бота
 
-                //Bot.SendTextMessageAsync(message.Chat.Id, "Проверка", replyToMessageId: message.MessageId);
-
-                // Callback'и от кнопок
-                //Bot.OnCallbackQuery += async (object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev) =>
-                //{
-                //    var message = ev.CallbackQuery.Message;
-                //    if (ev.CallbackQuery.Data == "callback1")
-                //    {
-                //        await Bot.AnswerCallbackQueryAsync(ev.CallbackQuery.Id, "You hav choosen " + ev.CallbackQuery.Data, true);
-                //    }
-                //    else
-                //    if (ev.CallbackQuery.Data == "callback2")
-                //    {
-                //        await Bot.SendTextMessageAsync(message.Chat.Id, "тест", replyToMessageId: message.MessageId);
-                //        await Bot.AnswerCallbackQueryAsync(ev.CallbackQuery.Id); // отсылаем пустое, чтобы убрать "частики" на кнопке
-                //    }
-                //};
-
                 Bot.OnUpdate += async (object su, Telegram.Bot.Args.UpdateEventArgs evu) =>
                 {
                     if (evu.Update.CallbackQuery != null || evu.Update.InlineQuery != null) return; // в этом блоке нам келлбэки и инлайны не нужны
-                    //var txt = list_out.Text;
                     var update = evu.Update;
                     var message = update.Message;
                     string txt = Properties.Settings.Default.solo;
@@ -62,7 +43,7 @@ namespace YavinBot
                     {
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
                         {
-                            // в ответ на команду /saysomething выводим сообщение
+                            // в ответ на команду выводим сообщение
                             await Bot.SendTextMessageAsync(message.Chat.Id, txt, replyToMessageId: message.MessageId);
                         }
                         if (message.Text == "/nakatim@YavinIV_rollbot" || message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!")
@@ -101,7 +82,7 @@ namespace YavinBot
                             }
 
                             string lls = string.Join("\r\n", lstT.ToArray());
-                            // в ответ на команду /saysomething выводим сообщение
+                            
                             await Bot.SendTextMessageAsync(message.Chat.Id, lls, replyToMessageId: message.MessageId);
                         }
                     }
@@ -164,10 +145,6 @@ namespace YavinBot
             }
 
             string lls = string.Join("\r\n", lst.ToArray());
-
-            //string fulltxt = Properties.Settings.Default.dateW;
-            //fulltxt = fulltxt + lls;
-            //Properties.Settings.Default.solo = fulltxt;
             Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
             Properties.Settings.Default.Save();
             list_out.Text = Properties.Settings.Default.solo;
