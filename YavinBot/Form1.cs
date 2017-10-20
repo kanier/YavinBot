@@ -41,6 +41,13 @@ namespace YavinBot
                     if (message == null) return;
                     if (message.Type == Telegram.Bot.Types.Enums.MessageType.TextMessage)
                     {
+                        if (message.Text == "/sololist" || message.Text == "/sololist@YavinIV_rollbot")
+                        {
+                            List<string> lstL = new List<string>();
+                            string lstall = File.ReadAllText("solo.txt");
+                            //string llsall = string.Join("\r\n", lstL.ToArray());///
+                            await Bot.SendTextMessageAsync(message.Chat.Id, lstall, replyToMessageId: message.MessageId);
+                        }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
                         {
                             // в ответ на команду выводим сообщение
@@ -53,6 +60,7 @@ namespace YavinBot
                             Random randT = new Random();
 
                             var inxT = File.ReadAllLines("tost.txt");
+                            
 
                             string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inxT
 
@@ -85,40 +93,13 @@ namespace YavinBot
                             
                             await Bot.SendTextMessageAsync(message.Chat.Id, lls, replyToMessageId: message.MessageId);
                         }
-                        if (message.Text == "/rancor@YavinIV_rollbot" || message.Text == "/rancor" )
+                        if (message.Text == "/aat@YavinIV_rollbot" || message.Text == "/aat" )
                         {
                             List<string> lstR = new List<string>();
 
-                            //Random randT = new Random();
 
-                            var inxR = File.ReadAllLines("rancor.txt");
+                            var inxR = File.ReadAllLines("aat.txt");
 
-                            //string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inxT
-
-                            //int k;
-
-                            //for (int i = 0; i < str.Length; i++)
-                            //{
-
-                            //    while (true)
-                            //    {
-
-                            //        k = randT.Next(inxT.Length);
-
-                            //        if (!lstT.Any(x => x.Equals(inxT[k])))
-                            //        {
-
-                            //            lstT.Add(inxT[k]);
-
-                            //            str[i] = inxT[k];
-
-                            //            break;
-
-                            //        }
-
-                            //    }
-
-                            //}
 
                             string llsR = string.Join("\r\n", inxR.ToArray());
 
