@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using MetroFramework.Components;
-using System.IO;
+
 
 namespace YavinBot
 {
@@ -31,7 +26,7 @@ namespace YavinBot
             {
                 var Bot = new Telegram.Bot.TelegramBotClient(key); // инициализируем API
                 await Bot.SetWebhookAsync(""); // Обязательно! убираем старую привязку к вебхуку для бота
-
+                
                 Bot.OnUpdate += async (object su, Telegram.Bot.Args.UpdateEventArgs evu) =>
                 {
                     if (evu.Update.CallbackQuery != null || evu.Update.InlineQuery != null) return; // в этом блоке нам келлбэки и инлайны не нужны
@@ -44,9 +39,11 @@ namespace YavinBot
                         if (message.Text == "/sololist" || message.Text == "/sololist@YavinIV_rollbot")
                         {
                             List<string> lstL = new List<string>();
-                            string lstall = File.ReadAllText("solo.txt");
+                            string lstall = System.IO.File.ReadAllText("solo.txt");
+                            string newlst = lstall.Replace("@","");
                             //string llsall = string.Join("\r\n", lstL.ToArray());///
-                            await Bot.SendTextMessageAsync(message.Chat.Id, lstall, replyToMessageId: message.MessageId);
+                            await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
+
                         }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
                         {
@@ -56,14 +53,9 @@ namespace YavinBot
                         if (message.Text == "/nakatim@YavinIV_rollbot" || message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!")
                         {
                             List<string> lstT = new List<string>();
-
                             Random randT = new Random();
-
-                            var inxT = File.ReadAllLines("tost.txt");
-                            
-
+                            var inxT = System.IO.File.ReadAllLines("tost.txt");
                             string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inxT
-
                             int k;
 
                             for (int i = 0; i < str.Length; i++)
@@ -98,7 +90,20 @@ namespace YavinBot
                             List<string> lstR = new List<string>();
 
 
-                            var inxR = File.ReadAllLines("aat.txt");
+                            var inxR = System.IO.File.ReadAllLines("aat.txt");
+
+
+                            string llsR = string.Join("\r\n", inxR.ToArray());
+
+
+                            await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
+                        }
+                        if (message.Text == "/rancor@YavinIV_rollbot" || message.Text == "/rancor")
+                        {
+                            List<string> lstR = new List<string>();
+
+
+                            var inxR = System.IO.File.ReadAllLines("rancor.txt");
 
 
                             string llsR = string.Join("\r\n", inxR.ToArray());
@@ -136,7 +141,7 @@ namespace YavinBot
 
             Random rand = new Random();
 
-            var inx = File.ReadAllLines("solo.txt");
+            var inx = System.IO.File.ReadAllLines("solo.txt");
 
             string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inx
 
@@ -169,6 +174,11 @@ namespace YavinBot
             Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
             Properties.Settings.Default.Save();
             list_out.Text = Properties.Settings.Default.solo;
+        }
+
+        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
+        {
+
         }
     }
 }

@@ -31,6 +31,8 @@
             this.BtnRun = new MetroFramework.Controls.MetroButton();
             this.lbl_status = new MetroFramework.Controls.MetroLabel();
             this.list_out = new System.Windows.Forms.RichTextBox();
+            this.eventLog1 = new System.Diagnostics.EventLog();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnRun
@@ -73,6 +75,11 @@
             this.list_out.TabIndex = 2;
             this.list_out.Text = "";
             // 
+            // eventLog1
+            // 
+            this.eventLog1.SynchronizingObject = this;
+            this.eventLog1.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLog1_EntryWritten);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -86,6 +93,7 @@
             this.Name = "Form1";
             this.Text = "YavinBot";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,6 +104,7 @@
         private MetroFramework.Controls.MetroButton BtnRun;
         private MetroFramework.Controls.MetroLabel lbl_status;
         private System.Windows.Forms.RichTextBox list_out;
+        private System.Diagnostics.EventLog eventLog1;
     }
 }
 
