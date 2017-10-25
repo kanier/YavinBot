@@ -41,7 +41,7 @@ namespace YavinBot
                     var name = message.From.FirstName;
                         var surname = message.From.LastName;
                         // Тестовый кусок. Начало.
-                        if (message.Text == "/reroll" )
+                        if (message.Text == "/reroll" || message.Text == "/reroll@YavinIV_rollbot")
                         {
                             if (username.Equals("kanier")|| username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
                             {
@@ -108,10 +108,22 @@ namespace YavinBot
 
                         }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
+
                         {
-                            // в ответ на команду выводим сообщение
-                            await Bot.SendTextMessageAsync(message.Chat.Id, txt, replyToMessageId: message.MessageId);
+                            if (username.Equals("kanier") || username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
+                            {
+                                // в ответ на команду выводим сообщение
+                                await Bot.SendTextMessageAsync(message.Chat.Id, txt, replyToMessageId: message.MessageId);
+                            }
+                            else
+                            {
+                                string ntxt = Properties.Settings.Default.short_solo;
+                                string wotxt = ntxt.Replace("@", "");
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + wotxt + " !Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют.Кончили аплодировать.", replyToMessageId: message.MessageId);
+                            }
+                            
                         }
+
                         if (message.Text == "/nakatim@YavinIV_rollbot" || message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!" || message.Text == "Рря!")
                         {
                             List<string> lstT = new List<string>();
