@@ -34,5 +34,17 @@ namespace YavinBot.Properties {
                 this["solo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string short_solo {
+            get {
+                return ((string)(this["short_solo"]));
+            }
+            set {
+                this["short_solo"] = value;
+            }
+        }
     }
 }
