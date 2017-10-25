@@ -39,7 +39,7 @@ namespace YavinBot
                     {
                     var username = message.From.Username;
                     var name = message.From.FirstName;
-                        var surname = message.From.LastName;
+                    var surname = message.From.LastName;
                         // Тестовый кусок. Начало.
                         if (message.Text == "/reroll" || message.Text == "/reroll@YavinIV_rollbot")
                         {
@@ -97,16 +97,26 @@ namespace YavinBot
                             
                         }
                         
-                        // Тестовый кусок. Конец.
-                        if (message.Text == "/sololist" || message.Text == "/sololist@YavinIV_rollbot")
+
+                            // Тестовый кусок. Конец.
+                            if (message.Text == "/sololist" || message.Text == "/sololist@YavinIV_rollbot")
                         {
                             List<string> lstL = new List<string>();
                             string lstall = System.IO.File.ReadAllText("solo.txt");
                             string newlst = lstall.Replace("@","");
                             //string llsall = string.Join("\r\n", lstL.ToArray());///
                             await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
+                            
+                        }
+
+                        if (message.Text.IndexOf("Чпок", StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.IndexOf("хуй", StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            
+                            //string llsall = string.Join("\r\n", lstL.ToArray());///
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
 
                         }
+
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
                         {
