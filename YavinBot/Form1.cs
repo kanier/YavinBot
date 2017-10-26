@@ -37,6 +37,7 @@ namespace YavinBot
                     if (message == null) return;
                     if (message.Type == Telegram.Bot.Types.Enums.MessageType.TextMessage)
                     {
+                    var chtid = message.Chat.Id;
                     var username = message.From.Username;
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
@@ -93,6 +94,7 @@ namespace YavinBot
                             else
                             {
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "Уважаемый(ая) "+name+" , Вам запрещено использование этой команды. Извините.", replyToMessageId: message.MessageId);
+                               // return;
                             }
                             
                         }
@@ -104,19 +106,30 @@ namespace YavinBot
                             List<string> lstL = new List<string>();
                             string lstall = System.IO.File.ReadAllText("solo.txt");
                             string newlst = lstall.Replace("@","");
-                            //string llsall = string.Join("\r\n", lstL.ToArray());///
                             await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
                             
                         }
 
-                        if (message.Text.IndexOf("Чпок", StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.IndexOf("хуй", StringComparison.OrdinalIgnoreCase) >= 0)
+                        string mat = System.IO.File.ReadAllText("mat.txt");
+                        //MessageBox.Show(mat);
+                        //string tttt = "789,qwe,rty,uio,asd,fgh,jkl";
+                        string[] Array = mat.Split(',');
+                        foreach (string newnew in Array)
                         {
+                            if (chtid.Equals("-1001074600105"))
+                            {
+                                if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0)
+                                {
+                                    //string dddd = message.Chat.Id.ToString();
+                                    //string llsall = string.Join("\r\n", lstL.ToArray());///
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
+                                    return;
+                                }
+                            }
                             
-                            //string llsall = string.Join("\r\n", lstL.ToArray());///
-                            await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
+                            //MessageBox.Show(dddd);
 
                         }
-
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
                         {
@@ -134,7 +147,7 @@ namespace YavinBot
                             
                         }
 
-                        if (message.Text == "/nakatim@YavinIV_rollbot" || message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!" || message.Text == "Рря!")
+                        if (message.Text == "/nakatim@YavinIV_rollbot"|| message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!" || message.Text == "Рря!")
                         {
                             List<string> lstT = new List<string>();
                             Random randT = new Random();
@@ -168,6 +181,7 @@ namespace YavinBot
                             string lls = string.Join("\r\n", lstT.ToArray());
                             
                             await Bot.SendTextMessageAsync(message.Chat.Id, lls, replyToMessageId: message.MessageId);
+                            
                         }
                         if (message.Text == "/aat@YavinIV_rollbot" || message.Text == "/aat" )
                         {
@@ -217,6 +231,8 @@ namespace YavinBot
             lbl_status.Text = "Бот запущен...";
             list_out.SelectionAlignment = HorizontalAlignment.Center;
             list_out.Text = Properties.Settings.Default.solo;
+            //string mat = System.IO.File.ReadAllText("mat.txt");
+            //MessageBox.Show(mat);
         }
 
         private void BtnRun_Click_1(object sender, EventArgs e)
