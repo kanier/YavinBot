@@ -46,11 +46,6 @@ namespace YavinBot
                         {
                             if (username.Equals("kanier")|| username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
                             {
-                                //List<string> lstL = new List<string>();
-                                //string lstall = System.IO.File.ReadAllText("solo.txt");
-                                //string newlst = lstall.Replace("@", "");
-                                //string llsall = string.Join("\r\n", lstL.ToArray());///
-                                //await Bot.SendTextMessageAsync(message.Chat.Id, name+" "+surname+", ты пиздат!", replyToMessageId: message.MessageId);
                                 List<string> lst = new List<string>();
 
                                 Random rand = new Random();
@@ -89,7 +84,7 @@ namespace YavinBot
                                 Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
                                 Properties.Settings.Default.Save();
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "В этот Фортуна избрала "+lls, replyToMessageId: message.MessageId);
-                                //list_out.Text = Properties.Settings.Default.solo;
+                                
                             }
                             else
                             {
@@ -111,24 +106,34 @@ namespace YavinBot
                         }
 
                         string mat = System.IO.File.ReadAllText("mat.txt");
-                        //MessageBox.Show(mat);
-                        //string tttt = "789,qwe,rty,uio,asd,fgh,jkl";
+                        //string matstrong = System.IO.File.ReadAllText("matsrong.txt");
+
                         string[] Array = mat.Split(',');
+                        //string[] ArrayS = matstrong.Split(',');
                         foreach (string newnew in Array)
                         {
-                            if (chtid.Equals("-1001074600105"))
-                            {
-                                if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0)
+                            //foreach (string newnewS in ArrayS)
+                           // {
+                                //if (chtid.Equals("-1001074600105"))
+                                //{
+                                    if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда"))
+                                    {
+                                if (username.Equals("batmanbilochka"))
                                 {
-                                    //string dddd = message.Chat.Id.ToString();
-                                    //string llsall = string.Join("\r\n", lstL.ToArray());///
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Ира, ты офигела в чате матом ругаться? Ата-та! Максим @Granula44 , ну скажи ей !", replyToMessageId: message.MessageId);
+                                    return;
+                                }
+                                else
+                                {
                                     await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
                                     return;
                                 }
-                            }
-                            
-                            //MessageBox.Show(dddd);
+                                    }
+                                //}
 
+
+
+                          //  }
                         }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
@@ -137,12 +142,14 @@ namespace YavinBot
                             {
                                 // в ответ на команду выводим сообщение
                                 await Bot.SendTextMessageAsync(message.Chat.Id, txt, replyToMessageId: message.MessageId);
+                                return;
                             }
                             else
                             {
                                 string ntxt = Properties.Settings.Default.short_solo;
                                 string wotxt = ntxt.Replace("@", "");
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + wotxt + " !Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют.Кончили аплодировать.", replyToMessageId: message.MessageId);
+                                return;
                             }
                             
                         }
@@ -181,6 +188,7 @@ namespace YavinBot
                             string lls = string.Join("\r\n", lstT.ToArray());
                             
                             await Bot.SendTextMessageAsync(message.Chat.Id, lls, replyToMessageId: message.MessageId);
+                            return;
                             
                         }
                         if (message.Text == "/aat@YavinIV_rollbot" || message.Text == "/aat" )
@@ -195,6 +203,7 @@ namespace YavinBot
 
 
                             await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
+                            return;
                         }
                         if (message.Text == "/rancor@YavinIV_rollbot" || message.Text == "/rancor")
                         {
@@ -208,6 +217,7 @@ namespace YavinBot
 
 
                             await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
+                            return;
                         }
                     }
 
@@ -229,10 +239,7 @@ namespace YavinBot
             this.bw.RunWorkerAsync("399222874:AAFEZ3Q9nMq1kwkod9l4VMMaeRHX3uQ_xEc");
             lbl_status.ForeColor = System.Drawing.Color.Green;
             lbl_status.Text = "Бот запущен...";
-            list_out.SelectionAlignment = HorizontalAlignment.Center;
-            list_out.Text = Properties.Settings.Default.solo;
-            //string mat = System.IO.File.ReadAllText("mat.txt");
-            //MessageBox.Show(mat);
+            
         }
 
         private void BtnRun_Click_1(object sender, EventArgs e)
@@ -274,17 +281,9 @@ namespace YavinBot
             Properties.Settings.Default.short_solo = lls;
             Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
             Properties.Settings.Default.Save();
-            list_out.Text = Properties.Settings.Default.solo;
+            MessageBox.Show(Properties.Settings.Default.solo);
         }
 
-        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
