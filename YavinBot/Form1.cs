@@ -116,7 +116,7 @@ namespace YavinBot
                            // {
                                 //if (chtid.Equals("-1001074600105"))
                                 //{
-                                    if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда"))
+                                    if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда")|| message.Text.Equals("блять") || message.Text.Equals("Блять"))
                                     {
                                 if (username.Equals("batmanbilochka"))
                                 {
