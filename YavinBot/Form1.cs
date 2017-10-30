@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-
+using Telegram.Bot.Types;
 
 namespace YavinBot
 {
@@ -41,6 +41,18 @@ namespace YavinBot
                     var username = message.From.Username;
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
+                        //string pin = message.PinnedMessage.Text;
+
+                        if (message.Text.Contains("надо качать")|| message.Text.Contains("Надо качать"))
+                        {
+                            FileToSend fts = new FileToSend();
+                            var pin = System.IO.File.Open("bolt.jpg", System.IO.FileMode.Open);
+                            fts.Content = pin;
+                            fts.Filename = "BOLT";
+                            await Bot.SendPhotoAsync(message.Chat.Id, fts, "А я на это кладу...", replyToMessageId: message.MessageId);
+                            return;
+
+                        }
                         // Тестовый кусок. Начало.
                         if (message.Text == "/reroll" || message.Text == "/reroll@YavinIV_rollbot")
                         {
@@ -106,34 +118,24 @@ namespace YavinBot
                         }
 
                         string mat = System.IO.File.ReadAllText("mat.txt");
-                        //string matstrong = System.IO.File.ReadAllText("matsrong.txt");
-
                         string[] Array = mat.Split(',');
-                        //string[] ArrayS = matstrong.Split(',');
                         foreach (string newnew in Array)
                         {
-                            //foreach (string newnewS in ArrayS)
-                           // {
-                                //if (chtid.Equals("-1001074600105"))
-                                //{
-                                    if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда")|| message.Text.Equals("блять") || message.Text.Equals("Блять"))
+                           
+                                if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда")|| message.Text.Equals("блять") || message.Text.Equals("Блять") || message.Text.Equals("Ебать") || message.Text.Equals("ебать") || message.Text.Equals("Ебат") || message.Text.Equals("ебат"))
                                     {
-                                if (username.Equals("batmanbilochka"))
-                                {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Ира, ты офигела в чате матом ругаться? Ата-та! Максим @Granula44 , ну скажи ей !", replyToMessageId: message.MessageId);
-                                    return;
-                                }
-                                else
-                                {
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
-                                    return;
-                                }
+                                        if (username.Equals("batmanbilochka"))
+                                            {
+                                             await Bot.SendTextMessageAsync(message.Chat.Id, "Ира, ты офигела в чате матом ругаться? Ата-та! Максим @Granula44 , ну скажи ей !", replyToMessageId: message.MessageId);
+                                             return;
+                                            }
+                                        else
+                                            {
+                                            await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
+                                            return;
+                                        }
                                     }
-                                //}
-
-
-
-                          //  }
+                              
                         }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
@@ -153,7 +155,6 @@ namespace YavinBot
                             }
                             
                         }
-
                         if (message.Text == "/nakatim@YavinIV_rollbot"|| message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!" || message.Text == "Рря!")
                         {
                             List<string> lstT = new List<string>();
