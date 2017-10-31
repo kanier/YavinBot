@@ -41,8 +41,15 @@ namespace YavinBot
                     var username = message.From.Username;
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
+                        FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
+                    //Sticker.FileId = new Sticker.FileID("910ff22b-dc88-4fed-a67d-62204fc38eb6");
                         //string pin = message.PinnedMessage.Text;
+                        //if (message.Text.Equals("stt"))
+                        //{
+                        //    await Bot.SendStickerAsync(message.Chat.Id, stick, replyToMessageId: message.MessageId);
+                        //    return;
 
+                        //}
                         if (message.Text.Contains("надо качать")|| message.Text.Contains("Надо качать"))
                         {
                             FileToSend fts = new FileToSend();
@@ -51,6 +58,13 @@ namespace YavinBot
                             fts.Filename = "BOLT";
                             await Bot.SendPhotoAsync(message.Chat.Id, fts, "А я на это кладу...", replyToMessageId: message.MessageId);
                             return;
+
+                        }
+                        if (message.Text.Contains("гидес")|| message.Text.Contains("Гидес")|| message.Text.Contains("g1des")|| message.Text.Contains("G1des"))
+                        {
+                            await Bot.SendTextMessageAsync(message.Chat.Id, "Опять Гидес... Как он надоел уже... ", replyToMessageId: message.MessageId);
+                            return;
+
 
                         }
                         // Тестовый кусок. Начало.
@@ -131,7 +145,7 @@ namespace YavinBot
                                             }
                                         else
                                             {
-                                            await Bot.SendTextMessageAsync(message.Chat.Id, "Офигел, в чате матом ругаться? Офицеры! Офицеры! Позовите @Granula44 !", replyToMessageId: message.MessageId);
+                                            await Bot.SendStickerAsync(message.Chat.Id, stick, replyToMessageId: message.MessageId);
                                             return;
                                         }
                                     }

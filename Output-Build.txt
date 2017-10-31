@@ -1,0 +1,3 @@
+﻿1>------ Build started: Project: YavinBot, Configuration: Debug Any CPU ------
+1>  YavinBot -> C:\Users\Администратор\source\repos\YavinBot\YavinBot\bin\Debug\YavinBot.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
