@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Telegram.Bot.Types;
 
@@ -41,15 +42,66 @@ namespace YavinBot
                     var username = message.From.Username;
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
-                        FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
-                    //Sticker.FileId = new Sticker.FileID("910ff22b-dc88-4fed-a67d-62204fc38eb6");
-                        //string pin = message.PinnedMessage.Text;
-                        //if (message.Text.Equals("stt"))
-                        //{
-                        //    await Bot.SendStickerAsync(message.Chat.Id, stick, replyToMessageId: message.MessageId);
-                        //    return;
+                    FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
+                        
 
-                        //}
+                        // ШАГ АРЕНЫ!!!!!
+                        //if (message.Text.Contains("Марфа, шаг арены "))
+                        //{
+                        //    Regex my_reg = new Regex(@"\D");
+                        //    string input_string = message.Text.ToString();
+                        //    string out_string = my_reg.Replace(input_string,"");
+                        //    //MessageBox.Show(out_string);
+                        //    int starthop = Convert.ToInt32(out_string);
+                        //    if (starthop <= 36 && starthop >= 34)
+                        //    {
+                        //        int hop1 = starthop - 8;
+
+                                
+                        //    }
+                        //    if (starthop <= 33 && starthop >=25)
+                        //    {
+                        //        int hop1 = starthop - 7;
+                        //        if (hop1 <= 24 && hop1 >= 19)
+                        //        {
+                        //            int hop2 = hop1 - 6;
+                        //            if (hop2 <= 18 && hop2 >= 13)
+                        //            {
+                        //                int hop3 = hop2 - 5;
+                        //                if (hop3 <= 12 && hop3 >= 6)
+                        //                {
+                        //                    int hop4 = hop3 - 4;
+                        //                    if (hop4 <= 8 && hop4 >5)
+                        //                    {
+                        //                        int hop5 = hop4 -4;
+                        //                        if (hop5 <= 5)
+                        //                        {
+                        //                            int hop6 = 1;
+                        //                            await Bot.SendTextMessageAsync(message.Chat.Id, starthop + " >> " + hop1 + " >> " + hop2 + " >> " + hop3 + " >> " + hop4 + " >> " + hop5+ " >> "+hop6);
+                        //                            return;
+                        //                        }
+                        //                    }
+                        //                }
+
+                        //            }
+                        //        }
+                        //    }
+                        //    if (starthop <= 24 && starthop >= 19)
+                        //    {
+                        //        int hop1 = starthop - 6;
+                                
+                        //    }
+                        //    if (starthop <= 18 && starthop >= 13)
+                        //    {
+                        //        int hop1 = starthop - 5;
+                                
+                        //    }
+                        //    if (starthop <= 12 && starthop >= 5)
+                        //    {
+                        //        int hop1 = starthop - 4;
+                                
+                        //    }
+                        //    }
                         if (message.Text.Contains("надо качать")|| message.Text.Contains("Надо качать"))
                         {
                             FileToSend fts = new FileToSend();
@@ -150,6 +202,12 @@ namespace YavinBot
                                         }
                                     }
                               
+                        }
+                        if (message.Text.Contains("/arena "))
+                        {
+
+
+
                         }
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
