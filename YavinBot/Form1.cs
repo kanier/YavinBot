@@ -63,12 +63,18 @@ namespace YavinBot
 
 
                         //}
+
                         // Тестовый кусок. Начало.
 
                         //ДЛЯ ЕВЫ
                         if (message.Text.Contains("Ева, "))
                         {
                             string inmess = message.Text.ToLower();
+                            if (inmess.Contains("привет")|| inmess.Contains("как дела") || inmess.Contains("здрав"))
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, "Привет, " + name + "." + "\r\n" + "Что ты хочешь знать?" + "\r\n" + "Я могу напомнить тебе правила Ямы или ААТ, показать список солистов или памятку по ТБ. Могу напомнить, кто закрывает соло следующую Яму-0. И многое другое ;) Достаточно обратиться ко мне по имени. К примеру: \"Ева, кто закрывает соло?\"", replyToMessageId: message.MessageId);
+                                return;
+                            }
                             if (inmess.Contains("соло"))
                             {
                                 if (username.Equals("kanier") || username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
@@ -127,7 +133,7 @@ namespace YavinBot
                                 await Bot.SendTextMessageAsync(message.Chat.Id, tbfile);
                                 return;
                             }
-                            if (inmess.Contains("прости"))
+                            if (inmess.Contains("прости")|| inmess.Contains("извин"))
                             {
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "Ничего страшного! Но я это запомню...", replyToMessageId: message.MessageId);
                                 return;
@@ -153,18 +159,23 @@ namespace YavinBot
                                 await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
                                 return;
                             }
-
-                            await Bot.SendTextMessageAsync(message.Chat.Id, "Что за ересь? Ничего не поняла(((");
+                            if (inmess.Contains("аат")|| inmess.Contains("танк"))
+                            {
+                                List<string> lstR = new List<string>();
+                                var inxR = System.IO.File.ReadAllLines("aat.txt");
+                                string llsR = string.Join("\r\n", inxR.ToArray());
+                                await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
+                                return;
+                            }
+                            await Bot.SendTextMessageAsync(message.Chat.Id, name+", что за ересь? Ничего не поняла(((");
                             return;
                         }
-                        //else
-                        //{
-                            
-                        
-                        //}
-
-
-
+                        if (message.Text.Equals("Ева"))
+                        {
+                           await Bot.SendTextMessageAsync(message.Chat.Id, "Слушаю тебя, "+name+"." + "\r\n" + "Что ты хочешь знать?" + "\r\n" + "Я могу напомнить тебе правила Ямы или ААТ, показать список солистов или памятку по ТБ. Могу напомнить, кто закрывает соло следующую Яму-0. И многое другое ;) Достаточно обратиться ко мне по имени. К примеру: \"Ева, кто закрывает соло?\"", replyToMessageId:message.MessageId);
+                           return;
+                        }
+                       
                         if (message.Text == "/tb" || message.Text == "/tb@YavinIV_rollbot")
                         {
                             string tbfile = System.IO.File.ReadAllText("tb.txt");
@@ -255,12 +266,12 @@ namespace YavinBot
                                     }
                               
                         }
-                        if (message.Text.Contains("/arena "))
-                        {
+                        //if (message.Text.Contains("/arena "))
+                        //{
 
 
 
-                        }
+                        //}
                         
                         if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
 
@@ -369,6 +380,7 @@ namespace YavinBot
             
         }
 
+        //РУЧНОЕ ОБНОВЛЕНИЕ СОЛО
         private void BtnRun_Click_1(object sender, EventArgs e)
         {
             List<string> lst = new List<string>();
