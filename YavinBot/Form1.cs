@@ -1,15 +1,13 @@
-﻿using MetroFramework.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Telegram.Bot.Types;
 
 namespace YavinBot
 {
-    public partial class Form1 : MetroForm
+    public partial class Form1 : Form
     {
         BackgroundWorker bw;
         public Form1()
@@ -27,7 +25,24 @@ namespace YavinBot
             {
                 var Bot = new Telegram.Bot.TelegramBotClient(key); // инициализируем API
                 await Bot.SetWebhookAsync(""); // Обязательно! убираем старую привязку к вебхуку для бота
-                
+                //while (true)
+                //{
+                //    Random rnd = new Random();
+                //    //int Hour = 17;
+                //    int Minute = 00+rnd.Next(1,20);
+                //    //int Seconds = 00; 
+                    
+                //    //if ((Hour == System.DateTime.Now.Hour) && (Minute == System.DateTime.Now.Minute))
+                //    if ((Minute == System.DateTime.Now.Minute))
+                //    {
+                //        //MessageBox.Show("Проверка");
+                //        await Bot.SendTextMessageAsync("-1001119850321", "Мне скучно. (((" );
+                //        return;
+                //    }
+                //    System.Threading.Thread.Sleep(100);
+
+                //    out_min.Text = Minute.ToString();
+                //}
                 Bot.OnUpdate += async (object su, Telegram.Bot.Args.UpdateEventArgs evu) =>
                 {
                     if (evu.Update.CallbackQuery != null || evu.Update.InlineQuery != null) return; // в этом блоке нам келлбэки и инлайны не нужны
@@ -44,40 +59,53 @@ namespace YavinBot
                     var surname = message.From.LastName;
                     FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
                     string offlist = System.IO.File.ReadAllText("offlist.txt");
+                        
+                        
 
 
-
-                        //if (message.Text.Contains("надо качать")|| message.Text.Contains("Надо качать"))
-                        //{
-                        //    FileToSend fts = new FileToSend();
-                        //    var pin = System.IO.File.Open("bolt.jpg", System.IO.FileMode.Open);
-                        //    fts.Content = pin;
-                        //    fts.Filename = "BOLT";
-                        //    await Bot.SendPhotoAsync(message.Chat.Id, fts, "А я на это кладу...", replyToMessageId: message.MessageId);
-                        //    return;
-
-                        //}
-                        //if (message.Text.Contains("гидес")|| message.Text.Contains("Гидес")|| message.Text.Contains("g1des")|| message.Text.Contains("G1des"))
-                        //{
-                        //    await Bot.SendTextMessageAsync(message.Chat.Id, "Опять Гидес... Как он надоел уже... ", replyToMessageId: message.MessageId);
-                        //    return;
-
-
-                        //}
-
-                        // Тестовый кусок. Начало.
 
                         //ДЛЯ ЕВЫ
                         if (message.Text.Contains("Ева, "))
                         {
                             string inmess = message.Text.ToLower();
+                            //TEST CHAT ID
+                            if (inmess.Contains("chatid"))
+                            {
+                                if (username.Equals("kanier"))
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, chtid.ToString());
+                                    return;
+                                }
+                                return;
+                            }
+
+                            //TEST MESSAGE TO OTHER CHAT
+                            if (inmess.Contains("отправь")&& offlist.Contains(username))
+                            {
+
+                                ////Properties.Settings.Default.buffer = inmess;
+                                //string sendinmess = inmess.Replace("Ева, ", "");
+                                //Properties.Settings.Default.buffer = sendinmess;
+                                //Properties.Settings.Default.Save();
+                                //string smess = Properties.Settings.Default.buffer; 
+                                await Bot.SendTextMessageAsync("-1001119850321", message.Text.Replace("Ева, отправь ",""));
+                                return;
+
+                            }
+
                             if (inmess.Contains("привет")|| inmess.Contains("как дела") || inmess.Contains("здрав"))
                             {
                                 await Bot.SendTextMessageAsync(message.Chat.Id, "Привет, " + name + "." + "\r\n" + "Что ты хочешь знать?" + "\r\n" + "Я могу напомнить тебе правила Ямы или ААТ, показать список солистов или памятку по ТБ. Могу напомнить, кто закрывает соло следующую Яму-0. И многое другое ;) Достаточно обратиться ко мне по имени. К примеру: \"Ева, кто закрывает соло?\"", replyToMessageId: message.MessageId);
                                 return;
                             }
-                            if (inmess.Contains("соло"))
+                            if (inmess.Contains("соло")||inmess.Contains("закрывает"))
+                        
                             {
+                                if (inmess.Contains("хан"))
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Что-то слишком много Ханов развелось...");
+                                    return;
+                                }
                                 //if (username.Equals("kanier") || username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
                                 if (offlist.Contains(username))
                                 {
@@ -131,6 +159,45 @@ namespace YavinBot
                             }
                             if (inmess.Contains("тб"))
                             {
+                                
+                                    string f1text = System.IO.File.ReadAllText("f1.txt");
+                                    string f2text = System.IO.File.ReadAllText("f2.txt");
+                                    string f3text = System.IO.File.ReadAllText("f3.txt");
+                                    string f4text = System.IO.File.ReadAllText("f4.txt");
+                                    string f5text = System.IO.File.ReadAllText("f5.txt");
+                                    string f6text = System.IO.File.ReadAllText("f6.txt");
+                                    if (inmess.Contains("1"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f1text);
+                                        return;
+                                    }
+                                    if (inmess.Contains("2"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f2text);
+                                        return;
+                                    }
+                                    if (inmess.Contains("3"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f3text);
+                                        return;
+                                    }
+                                    if (inmess.Contains("4"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f4text);
+                                        return;
+                                    }
+                                    if (inmess.Contains("5"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f5text);
+                                        return;
+                                    }
+                                    if (inmess.Contains("6"))
+                                     {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, f6text);
+                                        return;
+                                     }
+
+                                
                                 string tbfile = System.IO.File.ReadAllText("tb.txt");
                                 await Bot.SendTextMessageAsync(message.Chat.Id, tbfile);
                                 return;
@@ -214,7 +281,7 @@ namespace YavinBot
 
                                     string lls = string.Join("\r\n", lst.ToArray());
                                     Properties.Settings.Default.short_solo = lls;
-                                    Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
+                                    Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " !";
                                     Properties.Settings.Default.Save();
                                     await Bot.SendTextMessageAsync(message.Chat.Id, "В этот раз Фортуна избрала " + lls, replyToMessageId: message.MessageId);
                                     return;
@@ -226,197 +293,22 @@ namespace YavinBot
                                 }
                                 
                             }
+                            if (inmess.Contains("спасибо")||inmess.Contains("благодар"))
+                            {
+                                await Bot.SendTextMessageAsync(message.Chat.Id, name + ", не стоит. Мне было даже немного приятно)))");
+                                return;
+                            }
 
-                            await Bot.SendTextMessageAsync(message.Chat.Id, name+ ", что за ересь? Ничего не поняла(((");
+                            await Bot.SendTextMessageAsync(message.Chat.Id, name + ", что за ересь? Я не понимаю, что ты имеешь в виду(((");
                             return;
                         }
-                        if (message.Text.Equals("Ева"))
+                        if (message.Text.Equals("Ева")|| message.Text.Contains("Ева,")||message.Text.Equals("/info")||message.Text.Equals("/info@YavinIV_rollbot"))
                         {
                            await Bot.SendTextMessageAsync(message.Chat.Id, "Слушаю тебя, "+name+"." + "\r\n" + "Что ты хочешь знать?" + "\r\n" + "Я могу напомнить тебе правила Ямы или ААТ, показать список солистов или памятку по ТБ. Могу напомнить, кто закрывает соло следующую Яму-0. И многое другое ;) Достаточно обратиться ко мне по имени. К примеру: \"Ева, кто закрывает соло?\"", replyToMessageId:message.MessageId);
                            return;
                         }
                        
-                        if (message.Text == "/tb" || message.Text == "/tb@YavinIV_rollbot")
-                        {
-                            string tbfile = System.IO.File.ReadAllText("tb.txt");
-                            await Bot.SendTextMessageAsync(message.Chat.Id, tbfile);
-                            return;
-                        }
-
-                        if (message.Text == "/reroll" || message.Text == "/reroll@YavinIV_rollbot")
-                        {
-                            if (offlist.Contains(username))
-                            {
-                                List<string> lst = new List<string>();
-
-                                Random rand = new Random();
-
-                                var inx = System.IO.File.ReadAllLines("solo.txt");
-
-                                string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inx
-
-                                int k;
-
-                                for (int i = 0; i < str.Length; i++)
-                                {
-
-                                    while (true)
-                                    {
-
-                                        k = rand.Next(inx.Length);
-
-                                        if (!lst.Any(x => x.Equals(inx[k])))
-                                        {
-
-                                            lst.Add(inx[k]);
-
-                                            str[i] = inx[k];
-
-                                            break;
-
-                                        }
-
-                                    }
-
-                                }
-
-                                string lls = string.Join("\r\n", lst.ToArray());
-                                Properties.Settings.Default.short_solo = lls;
-                                Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
-                                Properties.Settings.Default.Save();
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "В этот Фортуна избрала "+lls, replyToMessageId: message.MessageId);
-                                
-                            }
-                            else
-                            {
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "Уважаемый(ая) "+name+" , Вам запрещено использование этой команды. Извините.", replyToMessageId: message.MessageId);
-                                return;
-                            }
-                            
-                        }
                         
-
-                            // Тестовый кусок. Конец.
-                            if (message.Text == "/sololist" || message.Text == "/sololist@YavinIV_rollbot")
-                        {
-                            List<string> lstL = new List<string>();
-                            string lstall = System.IO.File.ReadAllText("solo.txt");
-                            string newlst = lstall.Replace("@","");
-                            await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
-                            
-                        }
-
-                        string mat = System.IO.File.ReadAllText("mat.txt");
-                        string[] Array = mat.Split(',');
-                        foreach (string newnew in Array)
-                        {
-                           
-                                if (message.Text.IndexOf(newnew, StringComparison.OrdinalIgnoreCase) >= 0 || message.Text.Equals("хуй") || message.Text.Equals("Хуй") || message.Text.Equals("бля") || message.Text.Equals("Бля") || message.Text.Equals("Манда") || message.Text.Equals("манда")|| message.Text.Equals("блять") || message.Text.Equals("Блять") || message.Text.Equals("Ебать") || message.Text.Equals("ебать") || message.Text.Equals("Ебат") || message.Text.Equals("ебат"))
-                                    {
-                                        if (username.Equals("batmanbilochka"))
-                                            {
-                                             await Bot.SendTextMessageAsync(message.Chat.Id, "Ира, ты офигела в чате матом ругаться? Ата-та! Максим @Granula44 , ну скажи ей !", replyToMessageId: message.MessageId);
-                                             return;
-                                            }
-                                        else
-                                            {
-                                            await Bot.SendStickerAsync(message.Chat.Id, stick, replyToMessageId: message.MessageId);
-                                            return;
-                                        }
-                                    }
-                              
-                        }
-                        //if (message.Text.Contains("/arena "))
-                        //{
-
-
-
-                        //}
-                        
-                        if (message.Text == "/solo@YavinIV_rollbot" || message.Text == "/solo")
-
-                        {
-                            if (username.Equals("kanier") || username.Equals("batmanbilochka") || username.Equals("SanguisVlad") || username.Equals("tim_kadyrov") || username.Equals("Maximych4PDA") || username.Equals("Elixir4pda") || username.Equals("USSRchild") || username.Equals("Granula44"))
-                            {
-                                // в ответ на команду выводим сообщение
-                                await Bot.SendTextMessageAsync(message.Chat.Id, txt, replyToMessageId: message.MessageId);
-                                return;
-                            }
-                            else
-                            {
-                                string ntxt = Properties.Settings.Default.short_solo;
-                                string wotxt = ntxt.Replace("@", "");
-                                await Bot.SendTextMessageAsync(message.Chat.Id, "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + wotxt + " !Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют.Кончили аплодировать.", replyToMessageId: message.MessageId);
-                                return;
-                            }
-                            
-                        }
-                        
-                        if (message.Text == "/nakatim@YavinIV_rollbot"|| message.Text == "/nakatim" || message.Text == "Накатим!" || message.Text == "🍷" || message.Text == "Бармен, Накатим!" || message.Text == "Рря!")
-                        {
-                            List<string> lstT = new List<string>();
-                            Random randT = new Random();
-                            var inxT = System.IO.File.ReadAllLines("tost.txt");
-                            string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inxT
-                            int k;
-
-                            for (int i = 0; i < str.Length; i++)
-                            {
-
-                                while (true)
-                                {
-
-                                    k = randT.Next(inxT.Length);
-
-                                    if (!lstT.Any(x => x.Equals(inxT[k])))
-                                    {
-
-                                        lstT.Add(inxT[k]);
-
-                                        str[i] = inxT[k];
-
-                                        break;
-
-                                    }
-
-                                }
-
-                            }
-
-                            string lls = string.Join("\r\n", lstT.ToArray());
-                            
-                            await Bot.SendTextMessageAsync(message.Chat.Id, lls, replyToMessageId: message.MessageId);
-                            return;
-                            
-                        }
-                        if (message.Text == "/aat@YavinIV_rollbot" || message.Text == "/aat" )
-                        {
-                            List<string> lstR = new List<string>();
-
-
-                            var inxR = System.IO.File.ReadAllLines("aat.txt");
-
-
-                            string llsR = string.Join("\r\n", inxR.ToArray());
-
-
-                            await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
-                            return;
-                        }
-                        if (message.Text == "/rancor@YavinIV_rollbot" || message.Text == "/rancor")
-                        {
-                            List<string> lstR = new List<string>();
-
-
-                            var inxR = System.IO.File.ReadAllLines("rancor.txt");
-
-
-                            string llsR = string.Join("\r\n", inxR.ToArray());
-
-
-                            await Bot.SendTextMessageAsync(message.Chat.Id, llsR, replyToMessageId: message.MessageId);
-                            return;
-                        }
                     }
 
                 };
@@ -426,7 +318,7 @@ namespace YavinBot
             }
             catch (Telegram.Bot.Exceptions.ApiRequestException ex)
             {
-                Console.WriteLine(ex.Message); // если ключ не подошел - пишем об этом в консоль отладки
+                System.IO.File.WriteAllText("error.log",ex.Message); // если ключ не подошел - пишем об этом в консоль отладки
             }
 
         }
@@ -440,19 +332,7 @@ namespace YavinBot
             
         }
 
-        //РУЧНОЕ ОБНОВЛЕНИЕ СОЛО
-        private void BtnRun_Click_1(object sender, EventArgs e)
-        {
-            
-
-            
-
-            //string lls = string.Join("\r\n", lst.ToArray());
-            //Properties.Settings.Default.short_solo = lls;
-            //Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " ! Здесь зрители аплодируют. Аплодируют, аплодируют, аплодируют. Кончили аплодировать.";
-            //Properties.Settings.Default.Save();
-            //MessageBox.Show(Properties.Settings.Default.solo);
-        }
+        
 
        
     }
