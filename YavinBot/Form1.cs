@@ -58,6 +58,7 @@ namespace YavinBot
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
                     FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
+                    FileToSend kickstick = new FileToSend("CAADAgADFwADCpgGDPT5dlQ90N3vAg");
                     string offlist = System.IO.File.ReadAllText("offlist.txt");
                         
                         
@@ -69,6 +70,13 @@ namespace YavinBot
                         {
                             string inmess = message.Text.ToLower();
                             //TEST CHAT ID
+                            if (inmess.Contains("пришло время"))
+                            {
+                                await Bot.SendStickerAsync(message.Chat.Id, kickstick);
+                                return;
+                            }
+
+
                             if (inmess.Contains("chatid"))
                             {
                                 if (username.Equals("kanier"))
@@ -82,7 +90,11 @@ namespace YavinBot
                             //TEST MESSAGE TO OTHER CHAT
                             if (inmess.Contains("отправь")&& offlist.Contains(username))
                             {
-
+                                if(inmess.Contains("стикер кик"))
+                                {
+                                    await Bot.SendStickerAsync("-1001119850321", kickstick);
+                                    return;
+                                }
                                 ////Properties.Settings.Default.buffer = inmess;
                                 //string sendinmess = inmess.Replace("Ева, ", "");
                                 //Properties.Settings.Default.buffer = sendinmess;
