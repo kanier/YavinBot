@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Telegram.Bot.Types;
@@ -57,8 +58,10 @@ namespace YavinBot
                     var username = message.From.Username;
                     var name = message.From.FirstName;
                     var surname = message.From.LastName;
+                    //var stream = System.IO.File.Open("GP.xlsx", FileMode.Open);
                     FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
                     FileToSend kickstick = new FileToSend("CAADAgADFwADCpgGDPT5dlQ90N3vAg");
+                    
                     string offlist = System.IO.File.ReadAllText("offlist.txt");
                         
                         
@@ -234,12 +237,42 @@ namespace YavinBot
                             }
                             if (inmess.Contains("список"))
                             {
-                                List<string> lstL = new List<string>();
-                                string lstall = System.IO.File.ReadAllText("solo.txt");
-                                string newlst = lstall.Replace("@", "");
-                                await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
-                                return;
+                                try
+                                {
+                                    List<string> lstL = new List<string>();
+                                    string lstall = System.IO.File.ReadAllText("solo.txt");
+                                    string newlst = lstall.Replace("@", "");
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, newlst, replyToMessageId: message.MessageId);
+                                    return;
+                                }
+                                catch
+                                {
+                                    await Bot.SendTextMessageAsync(message.Chat.Id, "Список солистов пуст. Надо бы обновить.");
+                                    return;
+                                }
                             }
+                            //if (inmess.Contains("gp"))
+                            //{
+                            //    if (offlist.Contains(username))
+                            //    {
+                            //        try
+                            //        {
+                            //            FileToSend fts = new FileToSend();
+                            //            fts.Content = stream;
+                            //            fts.Filename = "GP.xlsx";
+
+                            //            await Bot.SendDocumentAsync(message.Chat.Id, fts, "Вот файл");
+                            //            //await Bot.SendDocumentAsync(message.Chat.Id, new FileToSend("GP.xlsx"));
+                            //            return;
+                            //        }
+                            //        catch
+                            //        {
+                            //            await Bot.SendTextMessageAsync(message.Chat.Id, "Что-то пошло не так :(");
+                            //            //await Bot.SendDocumentAsync(message.Chat.Id, new FileToSend("GP.xlsx"));
+                            //            return;
+                            //        }
+                            //    }
+                            //}
                             if (inmess.Contains("аат")|| inmess.Contains("танк"))
                             {
                                 List<string> lstR = new List<string>();
@@ -258,46 +291,95 @@ namespace YavinBot
                             {
                                 if (offlist.Contains(username))
                                 {
-                                    List<string> lst = new List<string>();
 
-                                    Random rand = new Random();
+                                    //var checksolo = System.IO.File.ReadAllLines("solo.txt");
+                                    //if (checksolo.Length == 0)
+                                    //{
+                                    //    MessageBox.Show("Файл пуст!");
+                                    //}
+                                    string lastsolo = Properties.Settings.Default.short_solo;
+                                    var soloL = System.IO.File.ReadAllText("solo.txt");
+                                    var soloX = soloL.Replace(lastsolo, "");
+                                    //var soloF = soloX.Replace("\n\n", "\n");
+                                    //var lines = System.IO.File.ReadAllLines("solo.txt");
+                                    //string[] linesX = lines.re
+                                    //System.IO.File.WriteAllLines("solo.txt", lines);
+                                    //MessageBox.Show(lastsolo);
+                                    //MessageBox.Show(soloF);
+                                    System.IO.File.WriteAllText("solo.txt", soloX);
 
-                                    var inx = System.IO.File.ReadAllLines("solo.txt");
+                                    string fileName = "solo.txt";
+                                    string outputFileName = "solotemp.txt";
+                                    string inputLine;
 
-                                    string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inx
+                                    System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
+                                    System.IO.StreamWriter sw = new System.IO.StreamWriter(outputFileName);
 
-                                    int k;
-
-                                    for (int i = 0; i < str.Length; i++)
+                                    inputLine = sr.ReadLine();
+                                    while (inputLine != null)
                                     {
+                                        if (inputLine.Length > 0)
+                                        {
+                                            sw.WriteLine(inputLine);
+                                        }
+                                        // read the next line
+                                        inputLine = sr.ReadLine();
+                                    }
+                                    sr.Close();
+                                    sw.Close();
 
-                                        while (true)
+                                    var transf = System.IO.File.ReadAllText("solotemp.txt");
+                                    System.IO.File.WriteAllText("solo.txt", transf);
+                                    try
+                                    {
+                                        List<string> lst = new List<string>();
+
+                                        Random rand = new Random();
+
+                                        var inx = System.IO.File.ReadAllLines("solo.txt");
+
+                                        string[] str = new string[1]; // здесь будут храниться n случаные неповторяющиеся строки из inx
+
+                                        int k;
+
+                                        for (int i = 0; i < str.Length; i++)
                                         {
 
-                                            k = rand.Next(inx.Length);
-
-                                            if (!lst.Any(x => x.Equals(inx[k])))
+                                            while (true)
                                             {
 
-                                                lst.Add(inx[k]);
+                                                k = rand.Next(inx.Length);
 
-                                                str[i] = inx[k];
+                                                if (!lst.Any(x => x.Equals(inx[k])))
+                                                {
 
-                                                break;
+                                                    lst.Add(inx[k]);
+
+                                                    str[i] = inx[k];
+
+                                                    break;
+
+                                                }
+
 
                                             }
 
                                         }
 
+                                        string lls = string.Join("\r\n", lst.ToArray());
+                                        Properties.Settings.Default.short_solo = lls;
+                                        Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " !";
+                                        Properties.Settings.Default.Save();
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "В этот раз Фортуна избрала " + lls, replyToMessageId: message.MessageId);
+                                        return;
                                     }
-
-                                    string lls = string.Join("\r\n", lst.ToArray());
-                                    Properties.Settings.Default.short_solo = lls;
-                                    Properties.Settings.Default.solo = "Для закрытия следующей Ямы-0, Колесом Фортуны избран " + lls + " !";
-                                    Properties.Settings.Default.Save();
-                                    await Bot.SendTextMessageAsync(message.Chat.Id, "В этот раз Фортуна избрала " + lls, replyToMessageId: message.MessageId);
-                                    return;
-                                }
+                                    catch
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "Список солистов пуст. Надо бы обновить");
+                                        return;
+                                    }
+                                    }
+                                
                                 else
                                 {
                                     await Bot.SendTextMessageAsync(message.Chat.Id, name + " , мне не говорили, что тебе можно это делать. Извини.", replyToMessageId: message.MessageId);
@@ -338,6 +420,9 @@ namespace YavinBot
        
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Тест
+            //this.bw.RunWorkerAsync("358447207:AAEwJbHrp1HLgrGTrxtwtfvZ7FufHf8kW18");
+            //Рабочий
             this.bw.RunWorkerAsync("399222874:AAFEZ3Q9nMq1kwkod9l4VMMaeRHX3uQ_xEc");
             lbl_status.ForeColor = System.Drawing.Color.Green;
             lbl_status.Text = "Бот запущен...";
