@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Telegram.Bot.Types;
+using System.Management;
 
 namespace YavinBot
 {
@@ -26,26 +27,9 @@ namespace YavinBot
             {
                 var Bot = new Telegram.Bot.TelegramBotClient(key); // инициализируем API
                 await Bot.SetWebhookAsync(""); // Обязательно! убираем старую привязку к вебхуку для бота
-                                               //while (true)
-                                               //{
-                                               //    Random rnd = new Random();
-                                               //    //int Hour = 17;
-                                               //    int Minute = 00+rnd.Next(1,20);
-                                               //    //int Seconds = 00; 
-
-                //    //if ((Hour == System.DateTime.Now.Hour) && (Minute == System.DateTime.Now.Minute))
-                //    if ((Minute == System.DateTime.Now.Minute))
-                //    {
-                //        //MessageBox.Show("Проверка");
-                //        await Bot.SendTextMessageAsync("-1001119850321", "Мне скучно. (((" );
-                //        return;
-                //    }
-                //    System.Threading.Thread.Sleep(100);
-
-                //    out_min.Text = Minute.ToString();
-                //}
 
                 //TEST
+
                 try
                 {
 
@@ -69,7 +53,8 @@ namespace YavinBot
                                 FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
                                 FileToSend kickstick = new FileToSend("CAADAgADFwADCpgGDPT5dlQ90N3vAg");
                                 FileToSend gogo = new FileToSend("CAADAgADIgADCpgGDP2DujSOYxb2Ag");
-                            
+                                FileToSend stb_1 = new FileToSend("CAADAgADKAADCpgGDAlPwj3jog11Ag");
+                                FileToSend pipi = new FileToSend("bolt.jpg");
                                 string offlist = System.IO.File.ReadAllText("offlist.txt");
                                 //string guildlist = System.IO.File.ReadAllText("guildlist.txt");
                             
@@ -78,6 +63,16 @@ namespace YavinBot
                 try
                             {
 
+                            if (message.Text.Equals("Запрос 900"))
+                                {
+                                    string f1text = System.IO.File.ReadAllText("f1.txt");
+                                    var stream1 = System.IO.File.Open("STB.jpg", FileMode.Open);
+                                    FileToSend pipi1 = new FileToSend("STB.jpg",stream1);
+                                    pipi1.Content = stream1;
+                                    pipi1.Filename = "STB.jpg";
+                                    await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1, caption: f1text);
+                                    return;
+                                }
                             //ДЛЯ ЕВЫ
                             if (message.Text.Contains("Ева, "))
                                 {
@@ -173,6 +168,7 @@ namespace YavinBot
                                             return;
                                         }
                                     }
+
                                     if (inmess.Contains("накати") || inmess.Contains("рря") || inmess.Contains("тост"))
                                     {
                                         List<string> lstT = new List<string>();
@@ -209,50 +205,83 @@ namespace YavinBot
                                         await Bot.SendTextMessageAsync(message.Chat.Id, lls);
                                         return;
                                     }
-                                    if (inmess.Contains("тб"))
-                                    {
 
-                                        string f1text = System.IO.File.ReadAllText("f1.txt");
-                                        string f2text = System.IO.File.ReadAllText("f2.txt");
-                                        string f3text = System.IO.File.ReadAllText("f3.txt");
-                                        string f4text = System.IO.File.ReadAllText("f4.txt");
-                                        string f5text = System.IO.File.ReadAllText("f5.txt");
-                                        string f6text = System.IO.File.ReadAllText("f6.txt");
+                                    if (inmess.Contains("стб"))
+                                    {
+                                        //if (inmess.Contains("фаза"))
+                                        //{
+                                            string f1text = System.IO.File.ReadAllText("f1.txt");
+                                            string f2text = System.IO.File.ReadAllText("f2.txt");
+                                            string f3text = System.IO.File.ReadAllText("f3.txt");
+                                            string f4text = System.IO.File.ReadAllText("f4.txt");
+                                            string f5text = System.IO.File.ReadAllText("f5.txt");
+                                            string f6text = System.IO.File.ReadAllText("f6.txt");
+                                            var stream1 = System.IO.File.Open("STB.jpg", FileMode.Open);
+                                            FileToSend pipi1 = new FileToSend("STB.jpg", stream1)
+                                            {
+                                            Content = stream1,
+                                            Filename = "STB.jpg"
+                                            };
+
                                         if (inmess.Contains("1"))
-                                        {
+                                            {
+                                            //await Bot.SendStickerAsync(message.Chat.Id, stb_1);
+                                            //
+                                            //return;
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f1text);
                                             return;
+
                                         }
-                                        if (inmess.Contains("2"))
-                                        {
+
+                                            if (inmess.Contains("2"))
+                                            {
+                                            //
+                                            //return;
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f2text);
                                             return;
                                         }
-                                        if (inmess.Contains("3"))
-                                        {
+
+                                            if (inmess.Contains("3"))
+                                            {
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f3text);
-                                            return;
-                                        }
-                                        if (inmess.Contains("4"))
-                                        {
+                                                return;
+                                            }
+
+                                            if (inmess.Contains("4"))
+                                            {
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f4text);
-                                            return;
-                                        }
-                                        if (inmess.Contains("5"))
-                                        {
+                                                return;
+                                            }
+
+                                            if (inmess.Contains("5"))
+                                            {
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f5text);
-                                            return;
-                                        }
-                                        if (inmess.Contains("6"))
-                                        {
+                                                return;
+                                            }
+
+                                            if (inmess.Contains("6"))
+                                            {
+                                            await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1);
                                             await Bot.SendTextMessageAsync(message.Chat.Id, f6text);
-                                            return;
-                                        }
+                                                return;
+                                            }
+                                        //}
 
 
                                         string tbfile = System.IO.File.ReadAllText("tb.txt");
                                         await Bot.SendTextMessageAsync(message.Chat.Id, tbfile);
                                         return;
+                                    }
+                                    if (inmess.Contains("ттб"))
+                                    {
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "К сожалению, мне пока ничего об этом не известно. Посмотрим, что там нахерачили ЕА.", replyToMessageId: message.MessageId);
+                                        return;
+
                                     }
                                     if (inmess.Contains("прости") || inmess.Contains("извин"))
                                     {
@@ -427,17 +456,17 @@ namespace YavinBot
 
                                     }
 
-                                if (inmess.Contains("напомни мне")&&username.Equals("kanier"))
-                                    {
-                                        await Bot.SendTextMessageAsync(message.Chat.Id, "Хорошо, Хозяин!", replyToMessageId: message.MessageId);
-                                        return;
-                                    }
+                                //if (inmess.Contains("напомни мне")&&username.Equals("kanier"))
+                                //    {
+                                //        await Bot.SendTextMessageAsync(message.Chat.Id, "Хорошо, Хозяин!", replyToMessageId: message.MessageId);
+                                //        return;
+                                //    }
 
-                                else
-                                    {
-                                        await Bot.SendTextMessageAsync(message.Chat.Id, name + " , мне не говорили, что тебе можно это делать. Ничего личного.", replyToMessageId: message.MessageId);
-                                        return;
-                                    }
+                                //else
+                                //    {
+                                //        await Bot.SendTextMessageAsync(message.Chat.Id, name + " , мне не говорили, что тебе можно это делать. Ничего личного.", replyToMessageId: message.MessageId);
+                                //        return;
+                                //    }
 
 
                                 if (inmess.Contains("спасибо") || inmess.Contains("благодар"))
@@ -452,7 +481,7 @@ namespace YavinBot
                             }
                             catch (Exception ex)
                             {
-                                System.IO.File.AppendAllText("errorall.txt", DateTime.Now + "\r\n" + ex.Message);
+                                System.IO.File.AppendAllText("errorall.txt", DateTime.Now + "\r\n" + ex.Message + "\r\n");
                                 return;
                             }
 
