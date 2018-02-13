@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Telegram.Bot.Types;
 using System.Management;
+using System.Text.RegularExpressions;
+
 
 namespace YavinBot
 {
@@ -49,7 +51,8 @@ namespace YavinBot
                                 var username = message.From.Username;
                                 var name = message.From.FirstName;
                                 var surname = message.From.LastName;
-                                //var stream = System.IO.File.Open("GP.xlsx", FileMode.Open);
+                            //var stream = System.IO.File.Open("GP.xlsx", FileMode.Open);
+                                FileToSend vzhuh = new FileToSend("CAADAgADKwADCpgGDM8eYp6xnBJwAg");
                                 FileToSend stick = new FileToSend("CAADAgADjAAD2kJgEdHmJbf9LcNAAg");
                                 FileToSend kickstick = new FileToSend("CAADAgADFwADCpgGDPT5dlQ90N3vAg");
                                 FileToSend gogo = new FileToSend("CAADAgADIgADCpgGDP2DujSOYxb2Ag");
@@ -73,8 +76,44 @@ namespace YavinBot
                                     await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1, caption: f1text);
                                     return;
                                 }
-                            //ДЛЯ ЕВЫ
-                            if (message.Text.Contains("Ева, "))
+
+                                if (message.Text.Contains("ридонли")  && offlist.Contains(username))
+                                {
+                                    var RoS = message.Text.ToString();
+                                    Regex my_reg = new Regex(@"\D");
+                                    string out_string = my_reg.Replace(RoS, "");
+                                    int RoTime = Convert.ToInt32(out_string);
+                                    string min = null;
+                                    if (RoTime == 1 || RoTime == 21 || RoTime == 31 || RoTime == 41 || RoTime == 51)
+                                    {
+                                        min = " минуту";
+                                        
+                                    }
+                                    if (RoTime == 2||RoTime == 3 || RoTime == 4 || RoTime == 22 || RoTime == 23 || RoTime == 24 || RoTime == 32 || RoTime == 33 || RoTime == 34)
+                                    {
+                                        min = " минуты";
+                                    }
+                                    else
+                                    {
+                                        min = " минут";
+                                    }
+                                        //int RoTime = Convert.ToInt32(RoS.Split(' ')[0]);
+
+                                        //await Bot.SendTextMessageAsync(message.Chat.Id, message.ReplyToMessage.From.Username);
+                                        DateTime untilDate = DateTime.Now.AddMinutes(RoTime);
+                                        int iserid = message.ReplyToMessage.From.Id;
+                                        string usrid = iserid.ToString();
+                                        //await Bot.SendTextMessageAsync(message.ReplyToMessage)
+                                        await Bot.RestrictChatMemberAsync(message.Chat.Id, iserid, untilDate);
+                                        await Bot.SendStickerAsync(message.Chat.Id, vzhuh);
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "РО на " + RoTime.ToString() + min, replyToMessageId: message.ReplyToMessage.MessageId);
+                                        // await Bot.SendTextMessageAsync("-1001056004583", "РО на 10 минуты", replyToMessageId:message.MessageId);
+                                        await Bot.DeleteMessageAsync(message.Chat.Id, message.MessageId);
+                                        return;
+                                    
+                                }
+                                //ДЛЯ ЕВЫ
+                                if (message.Text.Contains("Ева, "))
                                 {
                                     string inmess = message.Text.ToLower();
                                 //TEST CHAT ID
@@ -98,6 +137,11 @@ namespace YavinBot
                                 //TEST MESSAGE TO OTHER CHAT
                                 if (inmess.Contains("отправь") && offlist.Contains(username))
                                     {
+                                        if(inmess.Contains("в кантину кота"))
+                                        {
+                                            await Bot.SendStickerAsync("-1001033483774", vzhuh);
+                                            return;
+                                        }
                                         if (inmess.Contains("стикер кик"))
                                         {
                                             await Bot.SendStickerAsync("-1001119850321", kickstick);
@@ -168,6 +212,11 @@ namespace YavinBot
                                             return;
                                         }
                                     }
+
+                                    //ТЕСТ РИДОНЛИ
+
+                                    
+
 
                                     if (inmess.Contains("накати") || inmess.Contains("рря") || inmess.Contains("тост"))
                                     {
@@ -271,8 +320,7 @@ namespace YavinBot
                                                 return;
                                             }
                                         //}
-
-
+                                       
                                         string tbfile = System.IO.File.ReadAllText("tb.txt");
                                         await Bot.SendTextMessageAsync(message.Chat.Id, tbfile);
                                         return;
