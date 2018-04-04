@@ -76,8 +76,8 @@ namespace YavinBot
                                     await Bot.SendPhotoAsync(message.Chat.Id, photo: pipi1, caption: f1text);
                                     return;
                                 }
-
-                                if (message.Text.Contains("ридонли")  && offlist.Contains(username))
+                            
+                                    if (message.Text.Contains("ридонли")  && offlist.Contains(username))
                                 {
                                     var RoS = message.Text.ToString();
                                     Regex my_reg = new Regex(@"\D");
@@ -106,7 +106,7 @@ namespace YavinBot
                                         //await Bot.SendTextMessageAsync(message.ReplyToMessage)
                                         await Bot.RestrictChatMemberAsync(message.Chat.Id, iserid, untilDate);
                                         await Bot.SendStickerAsync(message.Chat.Id, vzhuh);
-                                        await Bot.SendTextMessageAsync(message.Chat.Id, "РО на " + RoTime.ToString() + min, replyToMessageId: message.ReplyToMessage.MessageId);
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, message.ReplyToMessage.From.FirstName + ", поздравляю!  В качестве бонуса, ты получаешь РО на " + RoTime.ToString() + min, replyToMessageId: message.ReplyToMessage.MessageId);
                                         // await Bot.SendTextMessageAsync("-1001056004583", "РО на 10 минуты", replyToMessageId:message.MessageId);
                                         await Bot.DeleteMessageAsync(message.Chat.Id, message.MessageId);
                                         return;
@@ -116,8 +116,46 @@ namespace YavinBot
                                 if (message.Text.Contains("Ева, "))
                                 {
                                     string inmess = message.Text.ToLower();
-                                //TEST CHAT ID
-                                if (inmess.Contains("пришло время"))
+                                    //TEST CHAT ID
+
+                                    if (inmess.Contains("срейд"))
+                                    {
+                                        string srtext = System.IO.File.ReadAllText("link.txt");
+                                        //await Bot.SendTextMessageAsync(message.Chat.Id, "[Тестовая ссылка из бота](https://t.me/iv?url=https%3A%2F%2Fyavin4.ru%2Fother%2Fthe-sith-triumvirate%2F&rhash=a6a7d09d8d0768)");
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "Я просто оставлю это здесь...\n"+ srtext);
+                                        return;
+                                    }
+
+
+                                    if (inmess.Contains("экстерминатус") && username.Equals("kanier") || inmess.Contains("экстерминатус") && username.Equals("vlad_o_v"))
+                                    {
+                                        DateTime ticker = DateTime.Now;
+                                        Properties.Settings.Default.ticker_start = ticker;
+                                        Properties.Settings.Default.Save();
+                                        string txt_ticker = ticker.ToString();
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "Мне очень печально это говорить но, ПРИНЕСИТЕ FLUGGEGECHEIMEN!!!", replyToMessageId: message.MessageId);
+                                        return;
+
+                                    }
+                                    if (inmess.Contains("счетчик")||inmess.Contains("счётчик"))
+                                    {
+
+                                        string old_ticker = Properties.Settings.Default.ticker_start.ToString();
+                                        DateTime old_ticker_dt = Properties.Settings.Default.ticker_start;
+                                        DateTime now_ticker_dt = DateTime.Now;
+                                        TimeSpan alltime = now_ticker_dt - old_ticker_dt;
+                                        //string final_count_full = alltime.ToString();
+                                        //string final_count_short = final_count_full.Substring(0, final_count_full.LastIndexOf("."));
+                                        //string final_count_wo_days = alltime.ToString("DD:MM:SS");
+                                        //await Bot.SendTextMessageAsync(message.Chat.Id, "Новый отсчёт был запущен: " + old_ticker);
+                                        await Bot.SendTextMessageAsync(message.Chat.Id, "На Явине всё спокойно уже: "+ string.Format("\nДней: {0:%d} \nЧасов: {0:%h} \nМинут: {0:%m} \nСекунд: {0:%s}",alltime)+ "\nОтсчёт был запущен: " + old_ticker);
+                                        //await Bot.SendTextMessageAsync(message.Chat.Id, "Дней: " + final_count_short.Substring(0, final_count_short.LastIndexOf(".")));
+                                        return;
+
+                                    }
+
+
+                                    if (inmess.Contains("пришло время"))
                                     {
                                         await Bot.SendStickerAsync(message.Chat.Id, kickstick);
                                         return;

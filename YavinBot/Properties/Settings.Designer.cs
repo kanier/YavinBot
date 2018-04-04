@@ -58,5 +58,16 @@ namespace YavinBot.Properties {
                 this["buffer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime ticker_start {
+            get {
+                return ((global::System.DateTime)(this["ticker_start"]));
+            }
+            set {
+                this["ticker_start"] = value;
+            }
+        }
     }
 }

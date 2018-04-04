@@ -40,7 +40,7 @@
             this.lbl_status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl_status.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lbl_status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lbl_status.Location = new System.Drawing.Point(0, 43);
+            this.lbl_status.Location = new System.Drawing.Point(0, 54);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(132, 19);
             this.lbl_status.Style = MetroFramework.MetroColorStyle.Silver;
@@ -61,7 +61,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(164, 62);
+            this.ClientSize = new System.Drawing.Size(172, 73);
             this.Controls.Add(this.out_min);
             this.Controls.Add(this.lbl_status);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
