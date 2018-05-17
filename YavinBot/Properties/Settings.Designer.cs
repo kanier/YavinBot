@@ -69,5 +69,53 @@ namespace YavinBot.Properties {
                 this["ticker_start"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("399222874:AAFEZ3Q9nMq1kwkod9l4VMMaeRHX3uQ_xEc")]
+        public string temp {
+            get {
+                return ((string)(this["temp"]));
+            }
+            set {
+                this["temp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int hour_now {
+            get {
+                return ((int)(this["hour_now"]));
+            }
+            set {
+                this["hour_now"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int min_now {
+            get {
+                return ((int)(this["min_now"]));
+            }
+            set {
+                this["min_now"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public global::System.TimeSpan time_rec {
+            get {
+                return ((global::System.TimeSpan)(this["time_rec"]));
+            }
+            set {
+                this["time_rec"] = value;
+            }
+        }
     }
 }

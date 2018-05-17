@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbl_status = new MetroFramework.Controls.MetroLabel();
             this.out_min = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lbl_status
@@ -40,7 +42,7 @@
             this.lbl_status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lbl_status.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lbl_status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lbl_status.Location = new System.Drawing.Point(0, 54);
+            this.lbl_status.Location = new System.Drawing.Point(0, 42);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(132, 19);
             this.lbl_status.Style = MetroFramework.MetroColorStyle.Silver;
@@ -57,11 +59,15 @@
             this.out_min.TabIndex = 2;
             this.out_min.Text = "Empty";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(172, 73);
+            this.ClientSize = new System.Drawing.Size(164, 61);
             this.Controls.Add(this.out_min);
             this.Controls.Add(this.lbl_status);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -78,6 +84,7 @@
         #endregion
         private MetroFramework.Controls.MetroLabel lbl_status;
         private System.Windows.Forms.Label out_min;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
