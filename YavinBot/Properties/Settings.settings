@@ -3,28 +3,43 @@
   <Profiles />
   <Settings>
     <Setting Name="solo" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Для закрытия следующей Ямы-0, Колесом Фортуны избран @Azantul !</Value>
     </Setting>
     <Setting Name="short_solo" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="buffer" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">@Azantul</Value>
     </Setting>
     <Setting Name="ticker_start" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">07/05/2018 12:18:51</Value>
     </Setting>
     <Setting Name="temp" Type="System.String" Scope="User">
       <Value Profile="(Default)">399222874:AAFEZ3Q9nMq1kwkod9l4VMMaeRHX3uQ_xEc</Value>
     </Setting>
     <Setting Name="hour_now" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="min_now" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="time_rec" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:00:00</Value>
+    </Setting>
+    <Setting Name="out_txt" Type="System.String" Scope="User">
+      <Value Profile="(Default)">На Явине всё спокойно уже: 
+Дней: 21 
+Часов: 23 
+Минут: 44 
+Секунд: 27
+Отсчёт был запущен: 07.05.2018 12:18:51</Value>
+    </Setting>
+    <Setting Name="Параметр" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="best_try" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="buffer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+                </Value>
     </Setting>
   </Settings>
 </SettingsFile>
